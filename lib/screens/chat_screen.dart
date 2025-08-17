@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '../models/chat.dart';
 import '../models/message.dart';
-import '../widgets/message_bubble.dart';
 import '../widgets/input_bar.dart';
+import '../widgets/message_bubble.dart';
 
 class ChatScreen extends StatefulWidget {
   final Chat chat;
@@ -51,9 +52,11 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
             Hero(
               tag: 'avatar_${widget.chat.id}',
               child: CircleAvatar(
-                radius: 16,
+                radius: 20,
                 backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-                child: Text(widget.chat.avatarEmoji),
+                backgroundImage: widget.chat.avatarImage != null
+                    ? AssetImage(widget.chat.avatarImage!)
+                    : null, // عرض الصورة كـ بروفايل
               ),
             ),
             const SizedBox(width: 12),
@@ -63,7 +66,8 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                 children: [
                   Text(
                     widget.chat.name,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                 ],
               ),

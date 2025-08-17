@@ -21,12 +21,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
 
-    // Mock data (self-contained)
+    // Mock data with profile images
     chats = [
       Chat(
         id: 'c1',
         name: 'Mariam',
-        avatarEmoji: '🟢',
+        avatarImage: 'assets/stories/images1.png',
         messages: [
           Message(
             id: 'm1',
@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       Chat(
         id: 'c2',
         name: 'Ahmed',
-        avatarEmoji: '🟩',
+        avatarImage: 'assets/stories/images2.png',
         messages: [
           Message(
             id: 'm3',
@@ -57,8 +57,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       ),
       Chat(
         id: 'c3',
-        name: 'Work Group',
-        avatarEmoji: '💼',
+        name: 'Youssef',
+        avatarImage: 'assets/stories/images3.png',
         messages: [
           Message(
             id: 'm4',
@@ -75,6 +75,24 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             type: MessageType.sent,
           ),
         ],
+      ),
+      Chat(
+        id: 'c4',
+        name: 'Sara',
+        avatarImage: 'assets/stories/images4.png',
+        messages: [],
+      ),
+      Chat(
+        id: 'c5',
+        name: 'Omar',
+        avatarImage: 'assets/stories/images5.png',
+        messages: [],
+      ),
+      Chat(
+        id: 'c6',
+        name: 'Laila',
+        avatarImage: 'assets/stories/6.png',
+        messages: [],
       ),
     ];
   }
@@ -105,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ),
         ],
         bottom: TabBar(
-          controller: _tabController, // ✅ نربطه بالتاب كونترولر
+          controller: _tabController,
           tabs: const [
             Tab(text: 'CHATS'),
             Tab(text: 'STATUS'),
@@ -125,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ),
           // Status
           const StatusScreen(),
-          // Calls (placeholder)
+          // Calls placeholder
           const _CallsPlaceholder(),
         ],
       ),

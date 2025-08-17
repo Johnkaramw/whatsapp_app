@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_app/models/message.dart';
 import '../models/chat.dart';
 import '../screens/chat_screen.dart';
 
@@ -23,19 +24,23 @@ class ChatTile extends StatelessWidget {
         );
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         child: Row(
           children: [
             Hero(
               tag: 'avatar_${chat.id}',
               child: CircleAvatar(
-                radius: 24,
+                radius: 28,
                 backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-                // avatarEmoji في موديلك عبارة عن Emoji نصي، فنستخدم Text
-                child: Text(
-                  chat.avatarEmoji,
-                  style: const TextStyle(fontSize: 20),
-                ),
+                backgroundImage: chat.avatarImage != null
+                    ? AssetImage(chat.avatarImage!)
+                    : null,
+                child: chat.avatarImage == null
+                    ? Text(
+                        chat.avatarEmoji ?? '',
+                        style: const TextStyle(fontSize: 22),
+                      )
+                    : null,
               ),
             ),
             const SizedBox(width: 12),
@@ -49,30 +54,52 @@ class ChatTile extends StatelessWidget {
                         child: Text(
                           chat.name,
                           style: const TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 17,
                           ),
                         ),
                       ),
                       Text(
                         last != null ? _formatTime(last.time) : '',
                         style: TextStyle(
-                          color: Theme.of(
-                            context,
-                          ).textTheme.bodySmall?.color?.withOpacity(0.7),
+                          color: Theme.of(context)
+                              .textTheme
+                              .bodySmall
+                              ?.color
+                              ?.withOpacity(0.6),
                           fontSize: 12,
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 4),
-                  Text(
-                    last?.text ?? 'No messages yet',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: Theme.of(context).textTheme.bodySmall?.color,
-                    ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          last?.text ?? 'No messages yet',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.color
+                                ?.withOpacity(0.8),
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                      if (last != null && last.type == MessageType.received)
+                        Padding(
+                          padding: const EdgeInsets.only(left: 6.0),
+                          child: Icon(
+                            Icons.circle,
+                            size: 10,
+                            color: Colors.greenAccent.shade400,
+                          ),
+                        ),
+                    ],
                   ),
                 ],
               ),

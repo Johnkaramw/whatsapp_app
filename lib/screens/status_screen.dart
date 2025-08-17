@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_app/screens/statusview_screen.dart';
+
 import '../widgets/story_item.dart';
 
 class StatusScreen extends StatelessWidget {
   const StatusScreen({super.key});
 
-  void openStatus(BuildContext context, String name, String imageUrl) {
+  void openStatus(BuildContext context, String name, String assetPath,
+      {bool isVideo = false}) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => StatusViewScreen(name: name, imageUrl: imageUrl),
+        builder: (context) => StatusViewScreen(
+          name: name,
+          assetPath: assetPath,
+          isVideo: isVideo,
+        ),
       ),
     );
   }
@@ -20,6 +26,7 @@ class StatusScreen extends StatelessWidget {
       appBar: AppBar(title: const Text("Status")),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // My Status
             ListTile(
@@ -27,9 +34,7 @@ class StatusScreen extends StatelessWidget {
                 children: [
                   const CircleAvatar(
                     radius: 28,
-                    backgroundImage: NetworkImage(
-                      "https://i.pravatar.cc/300?img=10",
-                    ),
+                    backgroundImage: AssetImage("assets/stories/story1.png"),
                   ),
                   Positioned(
                     bottom: 0,
@@ -53,7 +58,7 @@ class StatusScreen extends StatelessWidget {
               onTap: () => openStatus(
                 context,
                 "My Status",
-                "https://i.pravatar.cc/300?img=10",
+                "assets/stories/story1.png",
               ),
             ),
 
@@ -62,14 +67,11 @@ class StatusScreen extends StatelessWidget {
             // Recent Updates
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Recent updates",
-                  style: TextStyle(
-                    color: Colors.grey[600],
-                    fontWeight: FontWeight.bold,
-                  ),
+              child: Text(
+                "Recent updates",
+                style: TextStyle(
+                  color: Colors.grey[600],
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
@@ -82,57 +84,58 @@ class StatusScreen extends StatelessWidget {
                   GestureDetector(
                     onTap: () => openStatus(
                       context,
-                      "Ahmed",
-                      "https://i.pravatar.cc/300?img=11",
+                      "ساره",
+                      "assets/stories/story2.png",
                     ),
                     child: const StoryItem(
-                      name: "Ahmed",
-                      imageUrl: "https://i.pravatar.cc/300?img=11",
+                      name: "ساره",
+                      assetPath: "assets/stories/story2.png",
                     ),
                   ),
                   GestureDetector(
                     onTap: () => openStatus(
                       context,
-                      "Mona",
-                      "https://i.pravatar.cc/300?img=12",
+                      "اندرو",
+                      "assets/stories/video1.mp4",
+                      isVideo: true,
                     ),
                     child: const StoryItem(
-                      name: "Mona",
-                      imageUrl: "https://i.pravatar.cc/300?img=12",
-                      isViewed: true,
+                      name: "اندرو",
+                      assetPath: "assets/stories/video1.mp4",
+                      isVideo: true,
                     ),
                   ),
                   GestureDetector(
                     onTap: () => openStatus(
                       context,
-                      "Omar",
-                      "https://i.pravatar.cc/300?img=13",
+                      "bebo",
+                      "assets/stories/story3.jpeg",
                     ),
                     child: const StoryItem(
-                      name: "Omar",
-                      imageUrl: "https://i.pravatar.cc/300?img=13",
+                      name: " bebo",
+                      assetPath: "assets/stories/story3.jpeg",
                     ),
                   ),
                   GestureDetector(
                     onTap: () => openStatus(
                       context,
-                      "Sara",
-                      "https://i.pravatar.cc/300?img=14",
+                      "katy",
+                      "assets/stories/story4.jpeg",
                     ),
                     child: const StoryItem(
-                      name: "Sara",
-                      imageUrl: "https://i.pravatar.cc/300?img=14",
+                      name: "katy",
+                      assetPath: "assets/stories/story4.jpeg",
                     ),
                   ),
                   GestureDetector(
                     onTap: () => openStatus(
                       context,
-                      "Mostafa",
-                      "https://i.pravatar.cc/300?img=15",
+                      "John karam",
+                      "assets/stories/story5.jpeg",
                     ),
                     child: const StoryItem(
-                      name: "Mostafa",
-                      imageUrl: "https://i.pravatar.cc/300?img=15",
+                      name: "John karam",
+                      assetPath: "assets/stories/story5.jpeg",
                     ),
                   ),
                 ],
